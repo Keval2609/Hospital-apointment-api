@@ -1,0 +1,46 @@
+[project]
+name = "hospital-appointment-api"
+version = "1.0.0"
+description = "Production-ready Hospital Appointment REST API"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi==0.115.12",
+    "uvicorn[standard]==0.34.3",
+    "sqlalchemy[asyncio]==2.0.41",
+    "asyncpg==0.30.0",
+    "alembic==1.15.2",
+    "pydantic==2.11.3",
+    "pydantic-settings==2.9.1",
+    "python-jose[cryptography]==3.4.0",
+    "passlib[bcrypt]==1.7.4",
+    "bcrypt==4.3.0",
+    "python-multipart==0.0.20",
+    "email-validator==2.2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==8.3.5",
+    "pytest-asyncio==0.25.3",
+    "httpx==0.28.1",
+    "aiosqlite==0.21.0",
+    "pytest-cov==6.1.1",
+]
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+
+[tool.coverage.run]
+source = ["app"]
+omit = ["tests/*", "alembic/*"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 80
